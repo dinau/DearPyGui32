@@ -374,15 +374,26 @@ void
 mvShowViewport(mvViewport& viewport, bool minimized, bool maximized)
 {
 	mvViewportData* viewportData = (mvViewportData*)viewport.platformSpecifics;
-	viewportData->wc = {
+	//viewportData->wc = {
+	//	sizeof(WNDCLASSEX),
+	//	CS_CLASSDC,
+	//	mvHandleMsg,
+	//	0L,
+	//	0L,
+	//	GetModuleHandle(nullptr), nullptr, nullptr, nullptr, nullptr,
+	//	_T(viewport.title.c_str()), nullptr
+	//};
+	WNDCLASSEX wc {
 		sizeof(WNDCLASSEX),
 		CS_CLASSDC,
-		mvHandleMsg,
+		(WNDPROC)mvHandleMsg,
 		0L,
 		0L,
 		GetModuleHandle(nullptr), nullptr, nullptr, nullptr, nullptr,
 		_T(viewport.title.c_str()), nullptr
 	};
+	memcpy(&viewportData->wc, &wc, sizeof(viewportData->wc));
+
 	RegisterClassEx(&viewportData->wc);
 
 	mvHandleModes(viewport);

@@ -40,7 +40,7 @@ def get_platform():
     }
     if sys.platform not in platforms:
         return sys.platform
-    
+
     return platforms[sys.platform]
 
 class BinaryDistribution(Distribution):
@@ -48,7 +48,7 @@ class BinaryDistribution(Distribution):
         return True
 
 class DPGBuildCommand(distutils.cmd.Command):
-  
+
   description = 'DPG Build Command'
   user_options = []
 
@@ -68,7 +68,7 @@ class DPGBuildCommand(distutils.cmd.Command):
         command = [r'set PATH="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin";"C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin";"C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin";%PATH% && ']
         command.append("mkdir cmake-build-local && ")
         command.append("cd cmake-build-local && ")
-        command.append('cmake .. -G "Visual Studio 16 2019" -A "x64" -DMVDIST_ONLY=True -DMVDPG_VERSION=')
+        command.append('cmake .. -G "Visual Studio 16 2019" -A "Win32" -DMVDIST_ONLY=True -DMVDPG_VERSION=')
         command.append(version_number() + " -DMV_PY_VERSION=")
         command.append(str(sys.version_info[0]) + "." + str(sys.version_info[1]) + " && ")
         command.append("cd .. && cmake --build cmake-build-local --config Release")
@@ -86,7 +86,7 @@ class DPGBuildCommand(distutils.cmd.Command):
         subprocess.check_call(''.join(command), shell=True)
         src_path = os.path.dirname(os.path.abspath(__file__))
         shutil.copy("cmake-build-local/DearPyGui/_dearpygui.so", src_path +"/output/dearpygui")
-    
+
     elif get_platform() == "OS X":
         command = ["mkdir cmake-build-local; "]
         command.append("cd cmake-build-local; ")
@@ -157,7 +157,7 @@ def setup_package():
         # copy add items to temporary location
         shutil.copy(src_path + "/dearpygui/_dearpygui.pyi", src_path + "/output/dearpygui")
         if get_platform() == "Windows":
-            shutil.copy(src_path + "/thirdparty/Microsoft/vcruntime140_1.dll", src_path + "/output/dearpygui")
+            shutil.copy(src_path + "/thirdparty/Microsoft/vcruntime140.dll", src_path + "/output/dearpygui")
 
     metadata = dict(
         name='dearpygui',                                      # Required
@@ -204,7 +204,7 @@ def setup_package():
     if os.environ.get('READTHEDOCS') == 'True':
         metadata['package_data']['dearpygui'] = ["__init__.py", "_dearpygui.py", "dearpygui.py", "demo.py", "experimental.py"]
     elif get_platform() == "Windows":
-        metadata['package_data']['dearpygui'] = ["__init__.py", "_dearpygui.so", "_dearpygui.pyd", "_dearpygui.pyi", "dearpygui.py", "demo.py", "experimental.py", "vcruntime140_1.dll"]
+        metadata['package_data']['dearpygui'] = ["__init__.py", "_dearpygui.so", "_dearpygui.pyd", "_dearpygui.pyi", "dearpygui.py", "demo.py", "experimental.py", "vcruntime140.dll"]
     else:
         metadata['package_data']['dearpygui'] = ["__init__.py", "_dearpygui.so", "_dearpygui.pyd", "_dearpygui.pyi", "dearpygui.py", "demo.py", "experimental.py"]
 
