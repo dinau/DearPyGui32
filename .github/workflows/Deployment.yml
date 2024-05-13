@@ -17,7 +17,7 @@ on:
       version:
         description: 'Dear PyGui Version'
         required: false
-        default: '1.11.0'
+        default: '1.12.0'
     
       deploy:
         description: 'Deploy (true will deploy to pypi)'
@@ -116,7 +116,7 @@ jobs:
 
   build-mac-silicon-wheels:
 
-    runs-on: macos-latest-large
+    runs-on: macos-latest-xlarge
     strategy:
       matrix:
         python-version: [ "3.10", "3.11", "3.12" ]
