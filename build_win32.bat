@@ -6,7 +6,7 @@ rem pip install wheel
 set plat_name=win32
 python -m setup bdist_wheel --plat-name %plat_name% --dist-dir dist
 
-set VERSION=1.11.0-cp311-cp311-win32
+set VERSION=1.11.1-cp311-cp311-win32
 
 copy dist\dearpygui-%VERSION%.whl win32\dist
 pip install win32\dist\dearpygui-%VERSION%.whl

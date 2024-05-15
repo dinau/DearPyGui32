@@ -1,10 +1,10 @@
 ﻿{
   "configurations": [
     {
-      "name": "Win32-Debug",
+      "name": "win32-Debug",
       "generator": "Ninja",
       "configurationType": "Debug",
-      "inheritEnvironments": [ "msvc_Win32_Win32" ],
+      "inheritEnvironments": [ "msvc_win32_win32" ],
       "buildRoot": "${projectDir}\\cmake-build-debug",
       "installRoot": "${projectDir}\\out\\install\\${name}",
       "cmakeCommandArgs": "",
@@ -12,7 +12,7 @@
       "ctestCommandArgs": ""
     },
     {
-      "name": "Win32-Release",
+      "name": "win32-Release",
       "generator": "Ninja",
       "configurationType": "Release",
       "buildRoot": "${projectDir}\\cmake-build-release",
@@ -20,7 +20,7 @@
       "cmakeCommandArgs": "",
       "buildCommandArgs": "",
       "ctestCommandArgs": "",
-      "inheritEnvironments": [ "msvc_Win32_Win32" ]
+      "inheritEnvironments": [ "msvc_win32_win32" ]
     }
   ]
 }
